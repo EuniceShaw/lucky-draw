@@ -46,7 +46,7 @@
               <span
                 v-if="!!list.find(d => d.key === item)"
                 :style="{
-                  fontSize: '40px'
+                  fontSize: '60px'
                 }"
               >
                 {{ list.find(d => d.key === item).name }}
@@ -67,7 +67,7 @@
       </div>
     </transition>
 
-    <el-button
+    <!-- <el-button
       class="audio"
       type="text"
       @click="
@@ -80,7 +80,7 @@
         class="iconfont"
         :class="[audioPlaying ? 'iconstop' : 'iconplay1']"
       ></i>
-    </el-button>
+    </el-button> -->
 
     <LotteryConfig :visible.sync="showConfig" @resetconfig="reloadTagCanvas" />
     <Tool
@@ -268,19 +268,19 @@ export default {
     pauseHandler() {
       this.audioPlaying = false;
     },
-    playAudio(type) {
-      if (type) {
-        this.$el.querySelector('#audiobg').play();
-      } else {
-        this.$el.querySelector('#audiobg').pause();
-      }
-    },
-    loadAudio() {
-      this.$el.querySelector('#audiobg').load();
-      this.$nextTick(() => {
-        this.$el.querySelector('#audiobg').play();
-      });
-    },
+    // playAudio(type) {
+    //   if (type) {
+    //     this.$el.querySelector('#audiobg').play();
+    //   } else {
+    //     this.$el.querySelector('#audiobg').pause();
+    //   }
+    // },
+    // loadAudio() {
+    //   this.$el.querySelector('#audiobg').load();
+    //   this.$nextTick(() => {
+    //     this.$el.querySelector('#audiobg').play();
+    //   });
+    // },
     getPhoto() {
       database.getAll(DB_STORE_NAME).then(res => {
         if (res && res.length > 0) {
@@ -305,7 +305,7 @@ export default {
         textColour: null,
         initial: speed(),
         dragControl: 1,
-        textHeight: 20,
+        textHeight: 60,
         noSelect: true,
         lock: 'xy'
       });
@@ -320,7 +320,7 @@ export default {
       const { speed, config } = this;
       if (this.running) {
         this.audioSrc = bgaudio;
-        this.loadAudio();
+        // this.loadAudio();
 
         window.TagCanvas.SetSpeed('rootcanvas', speed());
         this.showRes = true;
@@ -335,7 +335,7 @@ export default {
         }
 
         this.audioSrc = beginaudio;
-        this.loadAudio();
+        // this.loadAudio();
 
         const { number } = config;
         const { category, mode, qty, remain, allin } = form;
@@ -374,7 +374,7 @@ export default {
 #root {
   height: 100%;
   position: relative;
-  background: url('./assets/bg6.jpg') top center no-repeat;
+  background: url('./assets/bg10.png') top center no-repeat;
   background-size: cover;
   background-color: #121936;
   .mask {
@@ -390,6 +390,7 @@ export default {
       top: 17px;
       padding: 0;
       z-index: 9999;
+      color: #ccc;
       &.con {
         right: 20px;
       }
@@ -440,8 +441,8 @@ export default {
   transform: translateX(-50%) translateY(-50%);
   text-align: center;
   p {
-    color: red;
-    font-size: 50px;
+    color: #ccc;
+    font-size: 80px;
     line-height: 120px;
   }
   .container {
@@ -450,11 +451,12 @@ export default {
     flex-wrap: wrap;
   }
   .itemres {
-    background: #fff;
-    width: 160px;
-    height: 160px;
+    color: #ccc;
+    // background: #fff;
+    // width: 160px;
+    // height: 160px;
     border-radius: 4px;
-    border: 1px solid #ccc;
+    // border: 1px solid #ccc;
     line-height: 160px;
     font-weight: bold;
     margin-right: 20px;
