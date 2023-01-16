@@ -26,13 +26,13 @@
       </ul>
     </div>
     <transition name="bounce">
-      <div id="resbox" v-show="showRes">
-        <p @click="showRes = false">{{ categoryName }}抽奖结果：</p>
+      <div id="resBox" v-show="showRes">
+        <p @click="showRes = false">{{ categoryName }}中奖名单</p>
         <div class="container">
           <span
             v-for="item in resArr"
             :key="item"
-            class="itemres"
+            class="itemRes"
             :style="resCardStyle"
             :data-id="item"
             @click="showRes = false"
@@ -46,7 +46,7 @@
               <span
                 v-if="!!list.find(d => d.key === item)"
                 :style="{
-                  fontSize: '60px'
+                  fontSize: '100px'
                 }"
               >
                 {{ list.find(d => d.key === item).name }}
@@ -93,7 +93,7 @@
     <Result :visible.sync="showResult"></Result>
 
     <span class="copy-right">
-      金融科技群-金融机构合作部-机构研发部 出品
+      XXXXX 出品
     </span>
 
     <audio
@@ -305,7 +305,7 @@ export default {
         textColour: null,
         initial: speed(),
         dragControl: 1,
-        textHeight: 60,
+        textHeight: 70,
         noSelect: true,
         lock: 'xy'
       });
@@ -374,12 +374,12 @@ export default {
 #root {
   height: 100%;
   position: relative;
-  background: url('./assets/bg10.png') top center no-repeat;
+  background: url('./assets/bg10-3.jpg') top center no-repeat;
   background-size: cover;
-  background-color: #121936;
+  // background-color: #121936;
   .mask {
-    -webkit-filter: blur(5px);
-    filter: blur(5px);
+    -webkit-filter: blur(10px);
+    filter: blur(10px);
   }
   header {
     height: 50px;
@@ -433,7 +433,7 @@ export default {
   height: 100%;
 }
 
-#resbox {
+#resBox {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -441,16 +441,18 @@ export default {
   transform: translateX(-50%) translateY(-50%);
   text-align: center;
   p {
-    color: #ccc;
-    font-size: 80px;
+    // color: rgb(55, 1, 19);
+    color: #fff;
+    font-size: 120px;
     line-height: 120px;
+    text-shadow: 3px 3px #b48d8d;
   }
   .container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
   }
-  .itemres {
+  .itemRes {
     color: #ccc;
     // background: #fff;
     // width: 160px;
@@ -470,9 +472,13 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
+      color: #fff;
+      // color: rgb(55, 1, 19);
+      // text-shadow: 3px 3px #b48d8d;
     }
     &.numberOver::before {
       content: attr(data-id);
+      display: none;
       width: 30px;
       height: 22px;
       line-height: 22px;

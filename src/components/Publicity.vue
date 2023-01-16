@@ -2,7 +2,7 @@
   <div class="c-Publicity">
     <el-carousel
       height="50px"
-      :autoplay="true"
+      :autoplay="false"
       indicator-position="none"
       arrow="never"
       :interval="3000"

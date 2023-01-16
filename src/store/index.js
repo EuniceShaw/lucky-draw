@@ -1,3 +1,9 @@
+/*
+ * @Date: 2021-11-04 20:26:30
+ * @LastEditors: xiaoshuang
+ * @LastEditTime: 2023-01-16 10:10:15
+ * @Description:
+ */
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {
@@ -12,7 +18,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     config: {
-      name: '京东科技抽奖活动',
+      name: 'XXXXX抽奖活动',
       number: 40,
       firstPrize: 1
     },
@@ -26,7 +32,7 @@ export default new Vuex.Store({
   mutations: {
     setClearConfig(state) {
       state.config = {
-        name: '京东科技抽奖活动',
+        name: 'XXXXX抽奖活动',
         number: 30,
         firstPrize: 1
       };
@@ -45,7 +51,7 @@ export default new Vuex.Store({
     },
     setClearStore(state) {
       state.config = {
-        name: '京东科技抽奖活动',
+        name: 'XXXXX抽奖活动',
         number: 30,
         firstPrize: 1
       };
