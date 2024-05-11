@@ -1,17 +1,26 @@
 <template>
   <div id="tool">
-    <el-button @click="startHandler" type="primary" size="mini">{{
-      running ? '停止' : '开始'
-    }}</el-button>
-    <el-button size="mini" @click="showRemoveoptions = true">
+    <el-button
+      @click="startHandler"
+      class="btn btn_lottery"
+      type="primary"
+      size="mini"
+      >{{ running ? '停止' : '开始' }}</el-button
+    >
+    <el-button
+      size="mini"
+      class="btn btn_reset"
+      @click="showRemoveoptions = true"
+    >
       重置
     </el-button>
-    <el-button size="mini" @click="showImport = true">
-      导入名单
+    <el-button size="mini" class="btn btn_import" @click="showImport = true">
+      导入
     </el-button>
-    <el-button size="mini" @click="showImportphoto = true">
+
+    <!-- <el-button size="mini" @click="showImportphoto = true">
       导入照片
-    </el-button>
+    </el-button> -->
     <el-dialog
       :append-to-body="true"
       :visible.sync="showSetwat"
@@ -314,6 +323,7 @@ export default {
         });
       }
       this.$store.commit('setList', list);
+      console.log('list: ', list);
 
       this.$message({
         message: '保存成功',
@@ -330,18 +340,53 @@ export default {
 <style lang="scss">
 #tool {
   position: fixed;
-  width: 60px;
-  top: 50%;
-  right: 20px;
+  bottom: 30px;
+  right: 60px;
   transform: translateY(-50%);
   text-align: center;
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   align-items: center;
   justify-content: center;
-  .el-button + .el-button {
-    margin-top: 20px;
-    margin-left: 0px;
+  // .el-button + .el-button {
+  //   margin-top: 20px;
+  //   margin-left: 0px;
+  // }
+  .btn {
+    color: #ffd5d5;
+    border-color: #fff;
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 900;
+    font-size: 135%;
+    background: #dc6962;
+    border: none;
+    border-radius: 40px 10px;
+    width: 100px;
+    height: 50px;
+  }
+  .btn_reset {
+  }
+  .btn_import {
+    // visibility: hidden;
+    &:hover {
+      visibility: visible;
+    }
+  }
+  .btn_lottery {
+    color: #ffd5d5;
+    border-color: #fff;
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 900;
+    font-size: 135%;
+    background: #dc6962;
+    border: none;
+    border-radius: 40px 10px;
+    width: 100px;
+    height: 50px;
   }
 }
 .setwat-dialog {

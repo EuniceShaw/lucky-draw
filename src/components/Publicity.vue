@@ -32,9 +32,12 @@ export default {
     },
     message() {
       const { result, config } = this;
+      console.log('🚀 ~ file: Publicity.vue:35 ~ message ~ result', result);
+
       const fields = Object.keys(config);
 
       let message = [{ key: 0, title: config.name }];
+
       fields.forEach((item, index) => {
         let label = conversionCategoryName(item);
         if (result[item] && config[item] > 0) {
@@ -77,8 +80,10 @@ export default {
     }
     &.actiname {
       .title {
-        color: red;
+        color: #fdd1ce;
         font-size: 20px;
+        font-weight: bold;
+        text-shadow: 1px 1px 1px #999;
       }
     }
   }

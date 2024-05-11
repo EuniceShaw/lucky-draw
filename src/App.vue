@@ -1,5 +1,6 @@
 <template>
   <div id="root">
+    <!-- <div class="logo"></div> -->
     <header>
       <Publicity v-show="!running" />
       <el-button class="res" type="text" @click="showResult = true">
@@ -16,7 +17,7 @@
           <a
             href="javascript:void(0);"
             :style="{
-              color: '#fff',
+              color: '#fff'
             }"
           >
             {{ item.name ? item.name : item.key }}
@@ -38,26 +39,26 @@
             @click="showRes = false"
             :class="{
               numberOver:
-                !!photos.find((d) => d.id === item) ||
-                !!list.find((d) => d.key === item),
+                !!photos.find(d => d.id === item) ||
+                !!list.find(d => d.key === item)
             }"
           >
-            <span class="cont" v-if="!photos.find((d) => d.id === item)">
+            <span class="cont" v-if="!photos.find(d => d.id === item)">
               <span
-                v-if="!!list.find((d) => d.key === item)"
+                v-if="!!list.find(d => d.key === item)"
                 :style="{
-                  fontSize: '40px',
+                  fontSize: '40px'
                 }"
               >
-                {{ list.find((d) => d.key === item).name }}
+                {{ list.find(d => d.key === item).name }}
               </span>
               <span v-else>
                 {{ item }}
               </span>
             </span>
             <img
-              v-if="photos.find((d) => d.id === item)"
-              :src="photos.find((d) => d.id === item).value"
+              v-if="photos.find(d => d.id === item)"
+              :src="photos.find(d => d.id === item).value"
               alt="photo"
               :width="160"
               :height="160"
@@ -67,7 +68,7 @@
       </div>
     </transition>
 
-    <el-button
+    <!-- <el-button
       class="audio"
       type="text"
       @click="
@@ -80,7 +81,7 @@
         class="iconfont"
         :class="[audioPlaying ? 'iconstop' : 'iconplay1']"
       ></i>
-    </el-button>
+    </el-button> -->
 
     <LotteryConfig :visible.sync="showConfig" @resetconfig="reloadTagCanvas" />
     <Tool
@@ -93,7 +94,7 @@
     <Result :visible.sync="showResult"></Result>
 
     <span class="copy-right">
-      Copyright©zhangyongfeng5350@gmail.com
+      金融科技群-金融机构合作部-机构研发部 出品
     </span>
 
     <audio
@@ -122,7 +123,7 @@ import {
   resultField,
   newLotteryField,
   conversionCategoryName,
-  listField,
+  listField
 } from '@/helper/index';
 import { luckydrawHandler } from '@/helper/algorithm';
 import Result from '@/components/Result';
@@ -148,7 +149,7 @@ export default {
     config: {
       get() {
         return this.$store.state.config;
-      },
+      }
     },
     result: {
       get() {
@@ -156,7 +157,7 @@ export default {
       },
       set(val) {
         this.$store.commit('setResult', val);
-      },
+      }
     },
     list() {
       return this.$store.state.list;
@@ -176,13 +177,13 @@ export default {
       const nums = number >= 1500 ? 500 : this.config.number;
       const configNum = number > 1500 ? Math.floor(number / 3) : number;
       const randomShowNums = luckydrawHandler(configNum, [], nums);
-      const randomShowDatas = randomShowNums.map((item) => {
-        const listData = this.list.find((d) => d.key === item);
-        const photo = this.photos.find((d) => d.id === item);
+      const randomShowDatas = randomShowNums.map(item => {
+        const listData = this.list.find(d => d.key === item);
+        const photo = this.photos.find(d => d.id === item);
         return {
           key: item * (number > 1500 ? 3 : 1),
           name: listData ? listData.name : '',
-          photo: photo ? photo.value : '',
+          photo: photo ? photo.value : ''
         };
       });
       return randomShowDatas;
@@ -192,7 +193,7 @@ export default {
     },
     photos() {
       return this.$store.state.photos;
-    },
+    }
   },
   created() {
     const data = getData(configField);
@@ -207,7 +208,7 @@ export default {
     const newLottery = getData(newLotteryField);
     if (newLottery) {
       const config = this.config;
-      newLottery.forEach((item) => {
+      newLottery.forEach(item => {
         this.$store.commit('setNewLottery', item);
         if (!config[item.key]) {
           this.$set(config, item.key, 0);
@@ -231,7 +232,7 @@ export default {
       resArr: [],
       category: '',
       audioPlaying: false,
-      audioSrc: bgaudio,
+      audioSrc: bgaudio
     };
   },
   watch: {
@@ -241,8 +242,8 @@ export default {
         this.$nextTick(() => {
           this.reloadTagCanvas();
         });
-      },
-    },
+      }
+    }
   },
   mounted() {
     this.startTagCanvas();
@@ -268,21 +269,21 @@ export default {
     pauseHandler() {
       this.audioPlaying = false;
     },
-    playAudio(type) {
-      if (type) {
-        this.$el.querySelector('#audiobg').play();
-      } else {
-        this.$el.querySelector('#audiobg').pause();
-      }
-    },
-    loadAudio() {
-      this.$el.querySelector('#audiobg').load();
-      this.$nextTick(() => {
-        this.$el.querySelector('#audiobg').play();
-      });
-    },
+    // playAudio(type) {
+    //   if (type) {
+    //     this.$el.querySelector('#audiobg').play();
+    //   } else {
+    //     this.$el.querySelector('#audiobg').pause();
+    //   }
+    // },
+    // loadAudio() {
+    //   this.$el.querySelector('#audiobg').load();
+    //   this.$nextTick(() => {
+    //     this.$el.querySelector('#audiobg').play();
+    //   });
+    // },
     getPhoto() {
-      database.getAll(DB_STORE_NAME).then((res) => {
+      database.getAll(DB_STORE_NAME).then(res => {
         if (res && res.length > 0) {
           this.$store.commit('setPhotos', res);
         }
@@ -307,7 +308,7 @@ export default {
         dragControl: 1,
         textHeight: 20,
         noSelect: true,
-        lock: 'xy',
+        lock: 'xy'
       });
     },
     reloadTagCanvas() {
@@ -320,7 +321,7 @@ export default {
       const { speed, config } = this;
       if (this.running) {
         this.audioSrc = bgaudio;
-        this.loadAudio();
+        // this.loadAudio();
 
         window.TagCanvas.SetSpeed('rootcanvas', speed());
         this.showRes = true;
@@ -335,7 +336,7 @@ export default {
         }
 
         this.audioSrc = beginaudio;
-        this.loadAudio();
+        // this.loadAudio();
 
         const { number } = config;
         const { category, mode, qty, remain, allin } = form;
@@ -360,24 +361,22 @@ export default {
         }
         const oldRes = this.result[category] || [];
         const data = Object.assign({}, this.result, {
-          [category]: oldRes.concat(resArr),
+          [category]: oldRes.concat(resArr)
         });
         this.result = data;
         window.TagCanvas.SetSpeed('rootcanvas', [5, 1]);
         this.running = !this.running;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">
 #root {
   height: 100%;
   position: relative;
-  background-image: url('./assets/bg1.jpg');
-  background-size: 100% 100%;
-  background-position: center center;
-  background-repeat: no-repeat;
+  background: url('./assets/bg10.png') top center no-repeat;
+  background-size: cover;
   background-color: #121936;
   .mask {
     -webkit-filter: blur(5px);
@@ -392,6 +391,7 @@ export default {
       top: 17px;
       padding: 0;
       z-index: 9999;
+      color: #ccc;
       &.con {
         right: 20px;
       }
@@ -442,7 +442,7 @@ export default {
   transform: translateX(-50%) translateY(-50%);
   text-align: center;
   p {
-    color: red;
+    color: #ccc;
     font-size: 50px;
     line-height: 120px;
   }
@@ -452,11 +452,12 @@ export default {
     flex-wrap: wrap;
   }
   .itemres {
-    background: #fff;
-    width: 160px;
-    height: 160px;
+    color: #ccc;
+    // background: #fff;
+    // width: 160px;
+    // height: 160px;
     border-radius: 4px;
-    border: 1px solid #ccc;
+    // border: 1px solid #ccc;
     line-height: 160px;
     font-weight: bold;
     margin-right: 20px;
